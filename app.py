@@ -6,6 +6,125 @@ from dash.dependencies import Input, Output, State
 import plotly.express as px
 import pandas as pd
 
+#----Styling elements
+# the style arguments for the sidebar.
+SIDEBAR_STYLE = {
+    'position': 'fixed',
+    'top': 0,
+    'left': 0,
+    'bottom': 0,
+    'width': '20%',
+    'padding': '20px 10px',
+    'background-color': '#f8f9fa'
+}
+
+# the style arguments for the main content page.
+CONTENT_STYLE = {
+    'margin-left': '25%',
+    'margin-right': '5%',
+    'top': 0,
+    'padding': '20px 10px'
+}
+
+TEXT_STYLE = {
+    'textAlign': 'center',
+    'color': '#191970'
+}
+
+CARD_TEXT_STYLE = {
+    'textAlign': 'center',
+    'color': '#0074D9'
+}
+
+
+controls = html.Div(
+    [
+        html.P('Dropdown', style={
+            'textAlign': 'center'
+        }),
+        dcc.Dropdown(
+            id='dropdown',
+            options=[{
+                'label': 'Value One',
+                'value': 'value1'
+            }, {
+                'label': 'Value Two',
+                'value': 'value2'
+            },
+                {
+                    'label': 'Value Three',
+                    'value': 'value3'
+                }
+            ],
+            value=['value1'],  # default value
+            multi=True
+        ),
+        html.Br(),
+        html.P('Range Slider', style={
+            'textAlign': 'center'
+        }),
+        dcc.RangeSlider(
+            id='range_slider',
+            min=0,
+            max=20,
+            step=0.5,
+            value=[5, 15]
+        ),
+        html.P('Check Box', style={
+            'textAlign': 'center'
+        }),
+        dbc.Card([dbc.Checklist(
+            id='check_list',
+            options=[{
+                'label': 'Value One',
+                'value': 'value1'
+            },
+                {
+                    'label': 'Value Two',
+                    'value': 'value2'
+                },
+                {
+                    'label': 'Value Three',
+                    'value': 'value3'
+                }
+            ],
+            value=['value1', 'value2'],
+            inline=True
+        )]),
+        html.Br(),
+        html.P('Radio Items', style={
+            'textAlign': 'center'
+        }),
+        dbc.Card([dbc.RadioItems(
+            id='radio_items',
+            options=[{
+                'label': 'Value One',
+                'value': 'value1'
+            },
+                {
+                    'label': 'Value Two',
+                    'value': 'value2'
+                },
+                {
+                    'label': 'Value Three',
+                    'value': 'value3'
+                }
+            ],
+            value='value1',
+            style={
+                'margin': 'auto'
+            }
+        )]),
+        html.Br(),
+        dbc.Button(
+            id='submit_button',
+            n_clicks=0,
+            children='Submit',
+            color='primary'
+        ),
+    ]
+)
+
 data = pd.read_csv("avocado.csv")
 data = data.query("type == 'conventional' and region == 'Albany'")
 data["Date"] = pd.to_datetime(data["Date"], format="%Y-%m-%d")
@@ -23,11 +142,15 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
+
+
+
+
 content = html.Div(
     [
         html.H2('Analytics Dashboard Template', style=TEXT_STYLE),
         html.Hr(),
-        children=[
+        
         html.H1(
             children="Avocado Analytics",
         ),
@@ -60,11 +183,6 @@ content = html.Div(
                 "layout": {"title": "Avocados Sold"},
             },
         ),
-    ]
-        content_first_row,
-        content_second_row,
-        content_third_row,
-        content_fourth_row
     ],
     style=CONTENT_STYLE
 )
@@ -77,3 +195,4 @@ app.layout = html.Div([sidebar, content])
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", port=8050, debug=True)
+
