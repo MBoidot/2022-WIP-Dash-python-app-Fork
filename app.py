@@ -131,7 +131,7 @@ data["Date"] = pd.to_datetime(data["Date"], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
 
 app = dash.Dash(__name__)
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
 sidebar = html.Div(
     [
@@ -187,12 +187,7 @@ content = html.Div(
     style=CONTENT_STYLE
 )
 
-
-
-
 app.layout = html.Div([sidebar, content])
-
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", port=8050, debug=True)
-
