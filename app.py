@@ -39,37 +39,49 @@ CARD_TEXT_STYLE = {
 
 controls = html.Div(
     [
-        html.P('Dropdown', style={
+        html.P('Fork model', style={
             'textAlign': 'center'
         }),
         dcc.Dropdown(
             id='dropdown',
             options=[{
-                'label': 'Value One',
-                'value': 'value1'
+                'label': 'Fox 32',
+                'value': 'fx32'
             }, {
-                'label': 'Value Two',
-                'value': 'value2'
+                'label': 'Fox 34',
+                'value': 'fx34'
             },
                 {
-                    'label': 'Value Three',
-                    'value': 'value3'
+                    'label': 'Fox 36',
+                    'value': 'fx36'
                 }
             ],
-            value=['value1'],  # default value
-            multi=True
+            value=['fx32'],  # default value
+            multi=False
         ),
         html.Br(),
-        html.P('Range Slider', style={
+        html.P('Riding pressure (Psi)', style={
             'textAlign': 'center'
         }),
-        dcc.RangeSlider(
-            id='range_slider',
+        dcc.Slider(
+            id='my-slider',
             min=0,
             max=20,
             step=0.5,
-            value=[5, 15]
+            value=10,
+            tooltip={"placement": "bottom", "always_visible": True},
         ),
+        html.Br(),
+        html.P('Rider\'s weight', style={
+                    'textAlign': 'center'
+        }),
+
+        dcc.Input(
+            id='rider_weight',
+            type='number',
+            min=20, max=200, step=1
+            ),
+
         html.P('Check Box', style={
             'textAlign': 'center'
         }),
