@@ -7,6 +7,10 @@ import plotly.express as px
 import pandas as pd
 
 #----Styling elements
+
+
+
+
 # the style arguments for the sidebar.
 SIDEBAR_STYLE = {
     'position': 'fixed',
@@ -144,6 +148,7 @@ data.sort_values("Date", inplace=True)
 
 app = dash.Dash(__name__)
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
+#----external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 sidebar = html.Div(
     [
