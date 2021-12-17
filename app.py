@@ -7,10 +7,6 @@ import plotly.express as px
 import pandas as pd
 
 #----Styling elements
-
-
-
-
 # the style arguments for the sidebar.
 SIDEBAR_STYLE = {
     'position': 'fixed',
@@ -39,7 +35,6 @@ CARD_TEXT_STYLE = {
     'textAlign': 'center',
     'color': '#0074D9'
 }
-
 
 controls = html.Div(
     [
@@ -150,6 +145,11 @@ app = dash.Dash(__name__)
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 #----external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+header =  html.H1(
+        children='Hello Dash',
+        style=CONTENT_STYLE
+    )
+
 sidebar = html.Div(
     [
         html.H2('Parameters', style=TEXT_STYLE),
@@ -160,14 +160,22 @@ sidebar = html.Div(
 )
 
 
-
-
-
+#--Styling content part
 content = html.Div(
     [
         html.H2('Analytics Dashboard Template', style=TEXT_STYLE),
         html.Hr(),
         
+        dbc.Nav(
+            [
+                dbc.NavLink("Home", href="/", active="exact"),
+                dbc.NavLink("Page 1", href="/page-1", active="exact"),
+                dbc.NavLink("Page 2", href="/page-2", active="exact"),
+            ],
+            vertical=false,
+            pills=True,
+        ),
+        html.Hr(),
         html.H1(
             children="Avocado Analytics",
         ),
@@ -204,7 +212,7 @@ content = html.Div(
     style=CONTENT_STYLE
 )
 
-app.layout = html.Div([sidebar, content])
+app.layout = html.Div([header, sidebar, content])
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", port=8050, debug=True)
